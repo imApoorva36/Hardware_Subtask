@@ -1,0 +1,25 @@
+#include <ShiftReg.h>
+
+// Pin definitions
+const int dataPin = D7;
+const int clockPin = D5;
+const int latchPin = D6;
+const int enablePin = D8;
+
+ShiftReg shiftReg(dataPin, clockPin, latchPin, enablePin);
+
+void setup() {
+  // Set all pins as outputs
+  pinMode(dataPin, OUTPUT);
+  pinMode(clockPin, OUTPUT);
+  pinMode(latchPin, OUTPUT);
+  pinMode(enablePin, OUTPUT);
+}
+
+void loop() {
+  for (int i = 0; i < 16; i++) {
+    shiftReg.write(1 << i);
+    shiftReg.latch();
+    delay(1000);
+  }
+}
