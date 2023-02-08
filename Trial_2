@@ -1,0 +1,18 @@
+int latchPin = D1;
+int clockPin = D2;
+int dataPin = D3;
+
+void setup() {
+  pinMode(latchPin, OUTPUT);
+  pinMode(clockPin, OUTPUT);
+  pinMode(dataPin, OUTPUT);
+}
+
+void loop() {
+  for (int i = 0; i < 16; i++) {
+    digitalWrite(latchPin, LOW);
+    shiftOut(dataPin, clockPin, MSBFIRST, 1 << i);
+    digitalWrite(latchPin, HIGH);
+    delay(100);
+  }
+}
