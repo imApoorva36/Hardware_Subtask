@@ -1,0 +1,19 @@
+int latchPin = D1;//RCLK
+int clockPin = D2;//SRCLK
+int dataPin = D3;//SER
+
+void setup() {
+  pinMode(latchPin, OUTPUT);
+  pinMode(clockPin, OUTPUT);
+  pinMode(dataPin, OUTPUT);
+}
+
+void loop() {
+   for (int i = 1; i < 8; i++) {
+     
+     digitalWrite(latchPin, LOW);   
+     shiftOut(dataPin, clockPin, MSBFIRST, 1<<i);
+    digitalWrite(latchPin, HIGH);
+    delay(500);
+  }
+}
