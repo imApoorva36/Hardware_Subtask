@@ -1,0 +1,37 @@
+#include <Wire.h>
+#include "MPU6050.h"
+
+MPU6050 mpu;
+
+void setup() {
+  Serial.begin(115200);
+  Wire.begin();
+  mpu.initialize();
+  if (!mpu.testConnection()) {
+    Serial.println("MPU6050 connection failed");
+    while (1);
+  }
+}
+
+void loop() {
+  mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+
+  int xTilt = map(ax, -17000, 17000, -90, 90);
+  int yTilt = map(ay, -17000, 17000, -90, 90);
+
+  if (xTilt > 45) {
+    Serial.println("Move W");
+  }
+  if (xTilt < -45) {
+    Serial.println("Move S");
+  }
+  if (yTilt > 45) {
+    Serial.println("Move A");
+  }
+  if (yTilt < -45) {
+    Serial.println("Move D");
+  }
+  if (xTilt > -45 && xTilt < 45 && yTilt > -45 && yTilt < 45) {
+    Serial.println("Click NO MORE SNOW");
+  }
+}
