@@ -1,0 +1,12 @@
+import asyncio
+import websockets
+
+async def receive_data(websocket, path):
+    while True:
+        data = await websocket.recv()
+        print("Received data:", data)
+
+start_server = websockets.serve(receive_data, "192.168.4.1", 80)
+
+asyncio.get_event_loop().run_until_complete(start_server)
+asyncio.get_event_loop().run_forever()
