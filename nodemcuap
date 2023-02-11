@@ -1,0 +1,16 @@
+#include <ESP8266WiFi.h>
+
+const char *ssid = "Your_SSID";
+const char *password = "Your_Password";
+
+void setup() {
+  Serial.begin(115200);
+  WiFi.mode(WIFI_AP);
+  WiFi.softAP(ssid, password);
+  Serial.println();
+  Serial.print("IP address: ");
+  Serial.println(WiFi.softAPIP());
+}
+
+void loop() {
+}
